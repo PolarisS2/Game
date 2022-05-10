@@ -262,8 +262,8 @@
    
         var tr = trList [ count ]; 
    
-        var td1 = tr.getElementById( "td" )[ 1 ]; 
-        var td2 = tr.getElementById( "td" )[ 2 ]; 
+        var td1 = tr.getElementsByTagName( "td" )[ 1 ]; 
+        var td2 = tr.getElementsByTagName( "td" )[ 2 ]; 
    
         td1.innerHTML = guess; 
         td2.innerHTML = roundScore; 
@@ -314,7 +314,7 @@
         for ( var x = 0; x < trList.length; x++ ) { 
    
             var tr = trList [ x ]; 
-            var tdList = tr.getElementById( "td" ); 
+            var tdList = tr.getElementsByTagName( "td" ); 
    
             tdList[ 1 ].innerHTML = "&nbsp;"; 
             tdList[ 2 ].innerHTML = "&nbsp;"; 
