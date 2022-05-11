@@ -59,14 +59,19 @@
      color: snow;
      margin-left: 30px;
 }
-#display{
+/* #display{
      display: none;
-}
-#ans:hover  p{
+} */
+/* #ans:hover  p{
      display: block;
      
+} */
+#check_Correct{
+     background-color: black;
+     color: white;
+     font-size: xx-large;
+     font-family: 'YdestreetB';
 }
-
 #FirstHint:hover p{
      display: block;
      color: white;
@@ -140,15 +145,15 @@
          text-align: center;
          display: flex;
     }
-    #ans{
+    /* #ans{
          margin-left: 23%;
          margin-bottom: 20%;
          font-size: x-large;
-    }
-    #display{
+    } */
+    /* #display{
          color: white;
          background-color: black;
-    }
+    } */
 
     body{
          font-size: smaller;
@@ -162,10 +167,10 @@
     <div class="main">
         <i><p style="font-size: xx-large;"><u>0 ~ 9</u> 중에서 <u>숫자</u>를 입력한 후, <u>결과 보기</u> 버튼을 누르세요.</p></i> 
         <br><br><br>
-        <div id="ans">
+        <!-- <div id="ans">
         <p id="ans" style="float: left; margin-right: 10px; background-color: black; color: red;">정답확인 </p>
         <p id="display" style="float: left;"></p>
-     </div>
+     </div> -->
 
 <!-- ──────────────── 힌트 부분 ──────────────── --> 
 <div id="Hint">
@@ -245,13 +250,13 @@
    
    function bullsAndCows () { 
    
-        var result = playOneRound( inputList ); 
+        var result = playOneRound( inputList );  //결과저장
    
         if ( result == undefined ) return; 
    
-        var strikes = result.bulls; 
+        var strikes = result.bulls;  
         var balls = result.cows; 
-        var roundScore =  strikes + " 스트라이크 │ " + balls + " 볼"; 
+        var roundScore =  strikes + " 스트라이크 │ " + balls + " 볼"; //table에 표시
    
    
         var count = result.count; 
@@ -262,23 +267,29 @@
    
         var tr = trList [ count ]; 
    
-        var td1 = tr.getElementsByTagName( "td" )[ 1 ]; 
-        var td2 = tr.getElementsByTagName( "td" )[ 2 ]; 
-   
+        var td1 = tr.getElementsByTagName( "td" )[ 1 ];  //내가 입력한숫자
+        var td2 = tr.getElementsByTagName( "td" )[ 2 ];  //스코어에 표시
+        
         td1.innerHTML = guess; 
         td2.innerHTML = roundScore; 
    
    
         var text = ""; 
         var final = result.final; 
-   
+ 
+
+        //정답확인
         if ( final ) { 
-            if ( strikes < inputList.length ){ text = final + "정답은 " + question + " 입니다."; } 
-            else { text = final; } 
-        } 
+		 if ( strikes < inputList.length )
+           { check_Correct.innerHTML = final + "<br />정답은 " + question + " 입니다."; 
+          }  else { 
+               check_Correct.innerHTML = final; 
+                  } 
+	      } else {
+                 check_Correct.innerHTML = ""; 
+               } 
    
-        check_Correct.innerHTML = ""; 
-   
+          //숫자 입력후 칸 초기화, 커서 자동이동
         formArea.reset(); 
         inputList[0].focus(); 
    } 
@@ -318,6 +329,7 @@
    
             tdList[ 1 ].innerHTML = "&nbsp;"; 
             tdList[ 2 ].innerHTML = "&nbsp;"; 
+            
         } 
    }
    
@@ -327,20 +339,20 @@ var count = 0;
 /*  ─────────────────────  메세지 설정  ─────────────────────  */ 
 
 var notice = { 
-		 notOne: "한 칸에 숫자를 하나씩 입력하세요.", // Enter each digit into each input field. 
-		 notNumber: "숫자가 아닙니다.", 			 // It's not digit. 
-		 repeated: "같은 숫자가 이미 있습니다. 다른 숫자를 입력하세요.", // No digits can be duplicated. 
-		 correct: "정답입니다.", 				 // Congratulations. Your answer is correct. 
-		 incorrect: "틀렸습니다. 새 게임을 진행하세요." // Your answer is incorrect. Start a new game. 
+		 notOne: "한 칸에 숫자를 하나씩 입력하세요.", 
+		 notNumber: "숫자가 아닙니다.", 			 
+		 repeated: "같은 숫자가 이미 있습니다. 다른 숫자를 입력하세요.", 
+		 correct: "정답입니다.", 				 
+		 incorrect: "틀렸습니다. 새 게임을 진행하세요." 
 }; 
 
 
 /*  ────────────────────  메세지 팝업창  ────────────────────  */ 
 
-function alertWindow ( message ) { // "alert()" 대신에, 팝업창을 만듦
+function alertWindow ( message ) { // "alert()" 대신에, 팝업창
 
 	 var text   = "<p>" + message + "</p><br />"; 
-	      text += "<button onclick=' self.close() '> 창 닫기 </button>"; // Close button. 
+	      text += "<button onclick=' self.close() '> 창 닫기 </button>";
 
 	 var bodyStyle = "font-family: sans-serif; font-size: 12px; text-align: center;"; 
 
@@ -363,7 +375,7 @@ function setQuestion ( lengths ) {
         num_ary.push(outed);
      }
     console.log(num_ary);
-    document.querySelector("#display").innerHTML = num_ary;
+//     document.querySelector("#display").innerHTML = num_ary;
     document.querySelector("#one").innerHTML=num_ary[0];
     document.querySelector("#two").innerHTML=num_ary[1];
     document.querySelector("#three").innerHTML=num_ary[2];
@@ -385,7 +397,7 @@ function playOneRound ( tagList ) {
 	 var lengths = tagList.length; 
 
 	 if ( count == 0 ) { 
-		 while ( question.length < lengths ) question = setQuestion( lengths ); 
+		 while ( question.length < lengths ) question = setQuestion( lengths );  //남은 기회동안 문제는 동일하게
 	 } 
 
 
@@ -396,17 +408,20 @@ function playOneRound ( tagList ) {
 	 for ( var x = 0; x < lengths; x++ ){ guess[ x ] = tagList[ x ].value; }
 
 
-	 var questionText = question.join().replace( /,/g , "" ); 
-	 var guessText = guess.join().replace( /,/g , "" ); 
-
+	 var questionText = question.join().replace( /,/g , "" );  //정답
+	 var guessText = guess.join().replace( /,/g , "" );  //플레이어가 적은 답
+      
 	 for ( var x = 0; x < lengths; x++ ) { 
 
-		 var tag = tagList[ x ]; 
-		 var value = tag.value.replace( / /g, "" ); 
+          
 
+		 var tag = tagList[ x ];  //위의 input 타입(tag)값=공백
+		 var value = tag.value.replace( / /g, "" ); //tag에 플레이어가 적은 값을 치환해서 추가
 
+          
+           //경고창 띄우는 구문
 		 var position = guessText.search( value ); 
-
+          
 		 if ( !value || value > 9 ) { 
 			 tag.select(); 
 			 return alertWindow( notice.notOne ); 
@@ -420,9 +435,8 @@ function playOneRound ( tagList ) {
 			 return alertWindow( notice.repeated ); 
 		 } 
 
-           
+           // 스트라이크 or 볼 체크
 		 position = questionText.search( value ); 
-
 		 if ( position == x ){ bulls += 1; } 
 		 else if ( position > -1 ){ cows += 1; }  
 	 } 
@@ -441,8 +455,9 @@ function playOneRound ( tagList ) {
 		 cows: cows, 
 		 question: questionText, 
 		 guess: guessText, 
-		 final: final 
-	 }; 
+		 final: final
+	 }
+      
 
 
 	 if ( final ){ reStarting(); } 
