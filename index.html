@@ -214,6 +214,7 @@
 </div>
    <table class="table" border=1>
         <thead style="background-color: black; color: white;" ><tr><th colspan="3"> SCORE </th></tr></thead>
+
         <!-- ──────────────── 출력 부분 ──────────────── --> 
         <tbody id="tbodyArea">
             <tr><td style="background-color: palegoldenrod;"> 1회 </td><td style="width: 60px;"></td><td style="width: 125px;"></td>&nbsp;</tr>
@@ -233,7 +234,7 @@
 
 <script>
 
-   /*  ─────────────────────  관련 태그들  ─────────────────────  */ 
+   //  ─────────────────────  관련 태그들  ─────────────────────  
    
    var formArea = document.getElementById( "formArea" ); 
    var inputList = formArea.getElementsByTagName( "input" ); 
@@ -246,7 +247,7 @@
 // var trList = tbodyArea.querySelectorAll("tr"); 
 // var check_Correct = document.querySelectorAll('check_Correct'); 
    
-   /*  ───────────────────   게임 실행 & 결과 출력  ──────────────────  */ 
+     //───────────────────   게임 실행 & 결과 출력  ──────────────────   
    
    function bullsAndCows () { 
    
@@ -278,7 +279,7 @@
         var final = result.final; 
  
 
-        //정답확인
+        //  ───────────────────   정답확인  ──────────────────  
         if ( final ) { 
 		 if ( strikes < inputList.length )
            { check_Correct.innerHTML = final + "<br />정답은 " + question + " 입니다."; 
@@ -295,7 +296,7 @@
    } 
    
    
-   /*  ──────────────────  마우스 커서, 자동 이동  ──────────────────  */ 
+   //  ──────────────────  마우스 커서, 자동 이동  ──────────────────  
    
    function changeFocus ( tag , next , event ){ 
    
@@ -316,7 +317,7 @@
    } 
    
    
-   /*  ─────────────────────    리셋 효과   ─────────────────────  */ 
+   //  ─────────────────────    리셋 효과   ─────────────────────  
    
    function deleteText () { 
    
@@ -336,7 +337,7 @@
 var question = []; 
 var count = 0; 
 
-/*  ─────────────────────  메세지 설정  ─────────────────────  */ 
+//  ─────────────────────  메세지 설정  ─────────────────────  
 
 var notice = { 
 		 notOne: "한 칸에 숫자를 하나씩 입력하세요.", 
@@ -347,7 +348,7 @@ var notice = {
 }; 
 
 
-/*  ────────────────────  메세지 팝업창  ────────────────────  */ 
+//  ────────────────────  메세지 팝업창  ────────────────────  
 
 function alertWindow ( message ) { // "alert()" 대신에, 팝업창
 
@@ -364,7 +365,7 @@ function alertWindow ( message ) { // "alert()" 대신에, 팝업창
 } 
 
 
-/*  ───────────────────   문제 출제용 함수   ───────────────────  */ 
+//  ───────────────────   문제 출제용 함수   ───────────────────  
 
 function setQuestion ( lengths ) { 
 
@@ -385,12 +386,12 @@ function setQuestion ( lengths ) {
 } 
 
 
-/*  ─────────────────────  재시작용  ─────────────────────  */  
+//  ─────────────────────  재시작용  ─────────────────────    
 
 function reStarting () { count = 0; question = []; } 
 
 
-/*  ───────────────────   게임 진행할 함수   ───────────────────  */ 
+//  ───────────────────   게임 진행할 함수   ───────────────────  
 
 function playOneRound ( tagList ) { 
 
